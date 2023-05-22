@@ -11,17 +11,7 @@ The API will return the request and response as JSON for a specific lambda funct
 
 ## Screenshots
 
-**Testing:**
-
-| ![Postman Request](screenshots/postman.png)  |  ![Discharging](screenshots/server.png) |
-|:---:|:---:|
-| Postman Request | Flask Server |
-
-**Logging in File and Metrics In AWS:**
-
-| ![Logging](screenshots/logging.png)  |  ![AWS](screenshots/aws-metrics.png) |
-|:---:|:---:|
-| Logging | AWS Metrics |
+Screenshots are present in the screenshots folder
 
 
 ## Getting Started

@@ -2,9 +2,12 @@ from flask import Flask, request, jsonify
 import json
 
 import utils
+from dotenv import load_dotenv
 
 
 app = Flask(__name__)
+
+load_dotenv('.env')
 
 
 @app.route('/capture-payload', methods=['POST'])

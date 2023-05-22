@@ -8,6 +8,15 @@ A REST API and backend that will capture and report lambda payload information.
 The API will return the request and response as JSON for a specific lambda function
 
 
+
+## Architecture
+
+1. Set up the Lambda function in AWS and created a REST API in flask with necessary Environment Variables obtained from AWS account.
+2. Invoke the target Lambda function(s) defind in the Enviroment variable, using the AWS SDK or Lambda service client, passing the captured request payload, and capture the response payload.
+3. Store the request and response information in an appropriate data storage service such as Amazon DynamoDB or Amazon RDS, have used Log File for simplicity here, utilizing a schema that includes the Lambda function name, request payload, response payload, and any additional metadata required for reporting.
+4. Implement a mechanism, such as another Lambda function or a scheduled job, to generate reports based on the stored data.
+
+
 ## Screenshots
 
 Screenshots are present in the screenshots folder

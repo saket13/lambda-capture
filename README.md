@@ -19,7 +19,17 @@ The API will return the request and response as JSON for a specific lambda funct
 
 ## Screenshots
 
-Screenshots are present in the screenshots folder
+**Flask Server and Making POST Requests to Server:**
+
+| ![flask-server](screenshots/server.png)  |  ![postman](screenshots/postman.png) |
+|:---:|:---:|
+| Flask Server | Postman Request |
+
+**Capturing Payload and AWS Metrics for Lambda:**
+
+| ![flask-server](screenshots/logging.png)  |  ![postman](screenshots/aws-metrics.png) |
+|:---:|:---:|
+| Capturing Payload | AWS Metrics |
 
 
 ## Getting Started

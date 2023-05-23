@@ -21,6 +21,15 @@ def capture_payload():
 
     except Exception as e:
         return jsonify({'success': False, 'request_payload': None, 'response_payload': None, 'message': str(e)})
+    
+
+@app.route('/logs/<function_name>', methods=['GET'])
+def get_lambda_logs(function_name):
+    try:
+        logs = utils.retrieve_lambda_logs(function_name)
+        return jsonify({'success': True, 'logs': logs})
+    except Exception as e:
+        return jsonify({'success': True, 'logs': None, 'message': str(e)})
 
 
 

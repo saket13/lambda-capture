@@ -4,3 +4,15 @@ Request Payload: {"key1": "hello", "key2": "val2", "key3": "val3"}
 Response Payload: "hello"
 Request Payload: {"key1": "hello2", "key2": "val2", "key3": "val3"}
 Response Payload: "hello2"
+Request Payload: {"key1": "hello3", "key2": "val2", "key3": "val3"}
+Response Payload: "hello3"
+Request Payload: {"key1": "hello3", "key2": "val2", "key3": "val3"}
+Response Payload: "hello3"
+Request Payload: {"key1": "hello5", "key2": "val2", "key3": "val3"}
+Response Payload: "hello5"
+Request Payload: {"key1": "hello", "key2": "val2", "key3": "val3"}
+Response Payload: {"errorMessage": "Syntax error in module 'lambda_function': invalid syntax (lambda_function.py, line 37)", "errorType": "Runtime.UserCodeSyntaxError", "stackTrace": ["  File \"/var/task/lambda_function.py\" Line 37\n        log_data['is-log'] = \n"]}
+Request Payload: {"key1": "hello", "key2": "val2", "key3": "val3"}
+Response Payload: "hello"
+Request Payload: {"key1": "hello", "key2": "val2", "key3": "val3"}
+Response Payload: "hello"

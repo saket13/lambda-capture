@@ -11,25 +11,25 @@ The API will return the request and response as JSON for a specific lambda funct
 
 ## Architecture
 
-1. Set up the Lambda function in AWS and created a REST API in flask with necessary Environment Variables obtained from AWS account.
-2. Invoke the target Lambda function(s) defind in the Enviroment variable, using the AWS SDK or Lambda service client, passing the captured request payload, and capture the response payload.
-3. Store the request and response information in an appropriate data storage service such as Amazon DynamoDB or Amazon RDS, have used Log File for simplicity here, utilizing a schema that includes the Lambda function name, request payload, response payload, and any additional metadata required for reporting.
-4. Implement a mechanism, such as another Lambda function or a scheduled job, to generate reports based on the stored data.
+1. Set up the Lambda function in AWS and log the necessary payload (request-response and other details) to be captured in the invocation lambda function.
+2. Enable CloudWatch Logs for your Lambda function by providing necessary IAM and make sure that log group associated with Lambda function is present and enabled.
+3. Implement a REST API to retrieve and process the logs for the lambda function associated with the cloudwatch log group and format the logs as per requirements by using the appropriate AWS SDK (boto3 in our case) or API to interact with CloudWatch Logs.
+4. Return the formatted logs as the API response to the client.
 
 
 ## Screenshots
 
 **Flask Server and Making POST Requests to Server:**
 
-| ![flask-server](screenshots/server.png)  |  ![postman](screenshots/postman.png) |
+| ![flask-server](screenshots/server.png)  |  ![logs-api](screenshots/logs-api.png) |
 |:---:|:---:|
-| Flask Server | Postman Request |
+| Flask Server | Logs API |
 
-**Capturing Payload and AWS Metrics for Lambda:**
+**Lambda function and AWS Metrics for Lambda:**
 
-| ![flask-server](screenshots/logging.png)  |  ![postman](screenshots/aws-metrics.png) |
+| ![lambda-function](screenshots/lambda-function.png)  |  ![postman](screenshots/aws-metrics.png) |
 |:---:|:---:|
-| Capturing Payload | AWS Metrics |
+| Lambda function | AWS Metrics |
 
 
 ## Getting Started
@@ -66,7 +66,8 @@ It is needed to set up the lambda using the AWS Free Tier account:
 
 ```
 https://aws.amazon.com/getting-started/hands-on/run-serverless-code/
-Take help of this to set up the lambda and configure the TARGET_LAMBDA_FUNCTION_NAME in .env file
+Take help of this to set up a general lambda function.
+Change the existing code to one mentioned in screenshot and DEPLOY using UI of AWSLambda Console
 ```
 
 ### Running Flask Server
@@ -77,16 +78,27 @@ flask run
 
 ### Testing
 
-Use postman to do a POST request:
-URL = http://127.0.0.1:5000/capture-payload
+Use postman to do a GET request:
+URL = http://127.0.0.1:5000/logs/<function_name>
 
 ```
+Where <function_name> is the name of the lambda function for which logs have to be obtained.
 Sample JSON
 {
-    "key1": "hello2",
-    "key2": "val2",
-    "key3": "val3"
+    "logs":[
+        {
+            "Request ID":"001a4ba2-08cf-426b-9140-faa2fbf79f20",
+            "Request Payload":
+                {
+                    "key1":"hello",
+                    "key2":"val2",
+                    "key3":"val3"
+                },
+            "Response Payload":"hello",
+            "Time-Epoch":3000
+        }
+    ],
+    "success":true
 }
 ```
-It will automatically create a new file payload.log capturing the details of request and response.
-And, the same will be obtained from API endpoint as well.
+Further more, different kinds of filters can be added to this to get the logs for a date range or type of logs etc.
